@@ -5,7 +5,7 @@ VERSION = 11.0
 
 CC     = cc
 CFLAGS = -std=c11 -D_POSIX_C_SOURCE=200809L -Wall -Wextra -pedantic -O2
-LDLIBS = -s -lX11
+LDLIBS = -I/usr/local/include -D_THREAD_SAFE -pthread -L/usr/local/lib -lX11 
 
 BIN_DIR = /usr/local/bin
 
@@ -13,7 +13,7 @@ SRC = devour.c
 OBJ = devour.o
 
 all: $(NAME)
-$(NAME): $(OBJ)
+	$(CC) $(LDLIBS) -o $(NAME) $(SRC)
 install: all
 	@mkdir -p $(BIN_DIR)
 	@mv $(NAME) $(BIN_DIR)
